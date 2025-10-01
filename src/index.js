@@ -36,7 +36,6 @@ app.get('/health', (req, res) => {
 // Example endpoint that demonstrates vulnerable axios usage
 app.get('/api/external-data', async (req, res) => {
   try {
-    // This uses the vulnerable axios version
     const response = await axios.get('https://jsonplaceholder.typicode.com/users');
     const processedData = _.map(response.data, user => formatUserData(user));
     
@@ -66,10 +65,8 @@ app.post('/api/auth/login', async (req, res) => {
   }
 
   try {
-    // In a real app, you'd check against a database
     const hashedPassword = await bcrypt.hash(password, 10);
     
-    // Generate JWT token (using vulnerable version)
     const token = jwt.sign(
       { username, loginTime: moment().unix() },
       JWT_SECRET,
@@ -109,9 +106,12 @@ app.use('*', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Started at: ${moment().format('YYYY-MM-DD HH:mm:ss')}`);
-});
+// Only start server if not in test mode
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    console.log(`Started at: ${moment().format('YYYY-MM-DD HH:mm:ss')}`);
+  });
+}
 
-module.exports = app; 
+module.exports = app;
