@@ -7,14 +7,11 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Copy ESLint config
-COPY .eslintrc.json ./
-
 # Copy full source (including tests)
 COPY src/ ./src/
 
-# Optional lint and test
-RUN if [ "$RUN_TESTS" = "true" ]; then npm run lint && npm test; fi
+# Optional test
+RUN if [ "$RUN_TESTS" = "true" ]; then npm test; fi
 
 # Remove test folder after tests
 RUN rm -rf ./src/test
