@@ -10,9 +10,6 @@ COPY package*.json ./
 # Install dependencies (including vulnerable ones)
 RUN npm install
 
-# Copy ESLint config
-COPY .eslintrc.json ./
-
 # Copy source code
 COPY src/ ./src/
 
