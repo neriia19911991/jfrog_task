@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "jest",
+    "test": "jest --detectOpenHandles"
     "lint": "eslint src/",
     "build": "echo 'Building application...' && mkdir -p dist && cp -r src/* dist/",
     "pack": "npm pack",
