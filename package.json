@@ -16,11 +16,9 @@
     "docker:build": "docker build -t user-management-service .",
     "docker:run": "docker run -p 3000:3000 user-management-service"
   },
-  "jest": {
-    "reporters": [
-      "default",
-      ["jest-junit", { "outputDirectory": "reports", "outputName": "junit.xml" }]
-    ]
+  "jest-junit": {
+    "outputDirectory": "reports",
+    "outputName": "junit.xml"
   },
   "keywords": ["user", "management", "api", "express", "nodejs"],
   "author": "Interview Candidate",
